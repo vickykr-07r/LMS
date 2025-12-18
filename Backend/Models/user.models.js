@@ -17,7 +17,7 @@ password:{
 },
 role:{
     type:String,
-    enum:["student","educators"],
+    enum:["student","educator"],
     required:true
 },
 photourl:{

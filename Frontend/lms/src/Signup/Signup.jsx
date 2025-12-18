@@ -1,23 +1,47 @@
 import { useState } from "react";
 import Style from "../Signup/Signup.module.css"
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios"
+import { useContext } from "react";
+import { ServerContext } from "../Context/Context";
+import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 export function Signup(){
     let [signupdata,setSignupData]=useState({
         name:"",
         email:"",
         password:""
     });
-
+    let [role,setRole]=useState("");
+    let [loading ,setLoading]=useState(false);
+    const navigate=useNavigate();
+    let{serverurl}=useContext(ServerContext)
     function handleinput(event){
       setSignupData((pre)=>{
       return {...pre,[event.target.name]:event.target.value}
       })
     }
-    return(
+    async function handleSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+    
+    try {
+    const result = await axios.post(`${serverurl}/api/auth/signup`,{ ...signupdata, role },{ withCredentials: true });
+    alert(result.data.message); 
+    setLoading(false);
+    navigate("/");
+
+    } catch (error) {
+    alert(error.response.data.message); 
+    console.log(error);
+    setLoading(false);
+    }
+   }
+    return( 
         <>
         <div className={Style.container}>
 
-         <div className={Style.box}>
+        <div className={Style.box}>
 
          <div className={Style.signupnav}>
             <h1>Let's Get Started</h1>
@@ -25,23 +49,23 @@ export function Signup(){
          </div>
 
         <div className={Style.form}>  
-        <form action="">
+        <form onSubmit={handleSubmit}>
 
          <label htmlFor="name">Name</label>
-         <input type="text" placeholder="Your Name" id="name" value={signupdata.name} onChange={handleinput}/>
+         <input type="text" placeholder="Your Name" id="name" value={signupdata.name} onChange={handleinput} name="name"/>
 
          <label htmlFor="email">Email</label>
-         <input type="email" placeholder="Enter Email" id="email" value={signupdata.email} onChange={handleinput}/>
+         <input type="email" placeholder="Enter Email" id="email" value={signupdata.email} onChange={handleinput} name="email"/>
 
          <label htmlFor="password">Password</label>
-         <input type="password" placeholder="**********" id="password" value={signupdata.password} onChange={handleinput}/>
+         <input type="password" placeholder="**********" id="password" value={signupdata.password} onChange={handleinput} name="password"/>
 
          <div className={Style.role}>
-         <span>Student</span>
-         <span>Educator</span>
+         <span  onClick={()=>{setRole("student")}}>Student</span>
+         <span  onClick={()=>{setRole("educator")}}>Educator</span>
          </div>
 
-         <button>Signup</button>
+         <button type="submit">{loading ? <ClipLoader/>:"Signup"}</button>
 
          </form>
          </div>
@@ -56,10 +80,11 @@ export function Signup(){
          
          <div className={Style.footer}>
          <span>Already have an Account ? </span>
-         <span>Login</span>
+         <span onClick={()=>{navigate("/login")}}>Login</span>
          </div>
 
-         </div>
+        </div>
+
         </div>
         </>
     )
