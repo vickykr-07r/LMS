@@ -23,6 +23,9 @@ import connect from "./DB/db.connect.js";
 import { authRouter } from "./Routes/isAuth.routes.js";
 app.use("/api/auth",authRouter)
 
+import { userRouter } from "./Routes/user.routes.js";
+app.use("/api/user",userRouter);
+
 app.listen(process.env.PORT,()=>{
     console.log("the app is listening")
     connect();
