@@ -9,9 +9,6 @@ try {
         })
     }
     const verifytoken=jwt.verify(token,process.env.SECRET_KEY)
-    
-    console.log(verifytoken)
-
     req.userId=verifytoken.id
 
     next();

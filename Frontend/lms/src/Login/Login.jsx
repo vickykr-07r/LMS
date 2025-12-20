@@ -4,6 +4,8 @@ import axios from "axios"
 import { ServerContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../Redux/userSlice";
 export function Login(){
     let [logindata,setLoginData]=useState({
         email:"",
@@ -17,13 +19,14 @@ export function Login(){
       return {...pre,[event.target.name]:event.target.value}
       })
     }
-    
+    let dispatch=useDispatch();
     async function handleSubmit(event){
         event.preventDefault();
         setLoading(true)
      try {
         let result=await axios.post(`${serverurl}/api/auth/login`,logindata,{withCredentials:true})
         alert(result.data.message)
+        dispatch(setUserData(result.data))
         navigate("/")
         setLoading(false)
      } catch (error) {

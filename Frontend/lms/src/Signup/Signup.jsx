@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { ServerContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../Redux/userSlice.js";
 export function Signup(){
     let [signupdata,setSignupData]=useState({
         name:"",
@@ -15,6 +17,7 @@ export function Signup(){
     let [role,setRole]=useState("");
     let [loading ,setLoading]=useState(false);
     const navigate=useNavigate();
+    let dispatch=useDispatch()
     let{serverurl}=useContext(ServerContext)
     function handleinput(event){
       setSignupData((pre)=>{
@@ -28,6 +31,7 @@ export function Signup(){
     try {
     const result = await axios.post(`${serverurl}/api/auth/signup`,{ ...signupdata, role },{ withCredentials: true });
     alert(result.data.message); 
+    dispatch(setUserData(result.data));
     setLoading(false);
     navigate("/");
 

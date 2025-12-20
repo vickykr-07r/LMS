@@ -1,7 +1,8 @@
+import Nav from "../Nav/Nav.jsx"
 export function Home(){
     return(
     <>
-    <h1>Home Page</h1>
+    <Nav/>
     </>
     )
 }

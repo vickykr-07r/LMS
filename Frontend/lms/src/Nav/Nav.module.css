@@ -1,0 +1,133 @@
+.navcontainer {
+  width: 100%;
+  height: 70px;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbox {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.left img {
+  height: 45px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.right img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #38bdf8;
+}
+
+.right button {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.IoReorderThree {
+  display: none;
+  font-size: 32px;
+  color: #38bdf8;
+  cursor: pointer;
+}
+
+.profileslidedown {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  width: 180px;
+  background: #020617;
+  border-radius: 10px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileslidedown h1 {
+  font-size: 14px;
+  padding: 12px 18px;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.profileslidedown h1:hover {
+  background: #1e293b;
+}
+
+/* 🔥 Mobile Slide Menu */
+@media (max-width: 768px) {
+  .right img,
+  .right button {
+    display: none;
+  }
+
+  .IoReorderThree {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobilemenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+    background: #020617;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 200;
+    animation: slidein 0.3s ease;
+  }
+
+  .mobilemenu button {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .closeicon {
+    font-size: 28px;
+    color: #e5e7eb;
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
