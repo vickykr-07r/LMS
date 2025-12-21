@@ -6,6 +6,7 @@ import { Home } from './Home/Home.jsx'
 import GetCurrentUser from './Custom Hooks/getcurrent.jsx'
 import Profile from './Profile/Profile.jsx'
 import { useSelector } from 'react-redux'
+import ForgetPassword from './ForgetPassword/ForgetPassword.jsx'
 function App() {
 GetCurrentUser()
 let {userData}=useSelector(state=>state.user)
@@ -16,6 +17,7 @@ let {userData}=useSelector(state=>state.user)
     <Route path='/signup' element={!userData ? <Signup/>:<Navigate to={"/"}/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/profile' element={userData ? <Profile/>:<Navigate to={"/signup"}/>}/>
+    <Route path='/forget' element={ <ForgetPassword/>}/>
   </Routes>
   </>
   )

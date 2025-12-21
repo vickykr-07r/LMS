@@ -16,7 +16,7 @@ export function Login(){
     let{serverurl}=useContext(ServerContext)
     function handleinput(event){
       setLoginData((pre)=>{
-      return {...pre,[event.target.name]:event.target.value}
+      return {...pre,[event.target.name]:event.target.value} 
       })
     }
     let dispatch=useDispatch();
@@ -53,10 +53,12 @@ export function Login(){
 
          <label htmlFor="password">Password</label>
          <input type="password" placeholder="**********" id="password" value={logindata.password} onChange={handleinput} name="password"/>
-
+            
          <button>{loading ? <ClipLoader/> :"Login"}</button>
-
          </form>
+         <div className={Style.forgotWrapper}>
+         <span onClick={() => navigate("/forget")}>Forget Password?</span>
+         </div>
          </div>
           
          <div className={Style.footer}>

@@ -1,6 +1,7 @@
 import User from "../Models/user.models.js";
 import bcrypt from "bcrypt"
 import  jwt from "jsonwebtoken"
+import SendMail from "../Config/SendMail.js";
 
 export const signup=async(req,res)=>{
 try {
@@ -118,3 +119,106 @@ return res.status(200).json({
     })
 }
 }
+
+export const sendotp =async(req,res)=>{
+try {
+    let {email}=req.body;
+    let user=await User.findOne({email}).select("-password")
+    if(!user){
+    return res.status(400).json({
+        message:"user not found"
+    })
+    }
+     
+    let otp=Math.floor(1000 + Math.random() * 9000);
+    user.resetotp=otp;
+    user.otpexpires=Date.now() + 5 * 60 * 1000;
+    user.isotpverified=false;
+    await user.save();
+    await SendMail(email,otp);
+
+    return res.status(200).json({
+        message:"otp sent successfully"
+    })
+
+} catch (error) {
+    return res.status(500).json({
+        message:error.message
+    })
+}
+}; 
+
+export const verifyotp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    const user = await User.findOne({ email }).select("-password");
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    if (!user.resetotp) {
+      return res.status(400).json({ message: "OTP not generated" });
+    }
+
+    if (user.isotpverified) {
+      return res.status(400).json({ message: "OTP already verified" });
+    }
+
+    if (user.otpexpires < Date.now()) {
+      return res.status(400).json({ message: "OTP expired" });
+    }
+
+    if (user.resetotp != otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    user.isotpverified = true;
+    user.resetotp = null;
+    user.otpexpires = null;
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "OTP verified successfully"
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+};
+
+export const resetpassword=async(req,res)=>{
+try {
+    let {email,password}=req.body;
+    let user=await User.findOne({email});
+    if(!user){
+    return res.status(400).json({
+        message:"user not found"
+    })
+    }
+    if(!user.isotpverified){
+    return res.status(400).json({
+        message:"Otp invalid"
+    })
+    }
+
+    let hassedpassword=await bcrypt.hash(password,10);
+    user.password=hassedpassword;
+    user.isotpverified = false;
+    user.resetotp = null;
+    user.otpexpires = null;
+    await user.save();
+
+    return res.status(200).json({
+    message:"password reset successfully"
+})
+} catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+}
+};

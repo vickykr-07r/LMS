@@ -46,7 +46,7 @@ function Nav(){
              }
              {
                 !userData && 
-                <button>Login</button>
+                <button onClick={()=>{navigate("/login")}}>Login</button>
              }
              <div className={Style.IoReorderThree} onClick={()=>{setShow(true)}}>
                <IoReorderThree />
