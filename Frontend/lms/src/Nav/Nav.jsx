@@ -16,9 +16,7 @@ function Nav(){
    let [show ,setShow]=useState(false)
     async function logout(){
         try {
-            console.log("heelo")
            let result=await axios.get(`${serverurl}/api/auth/logout`,{withCredentials: true}) 
-           console.log("world")
            console.log(result.data.message)
            dispatch(setUserData(null))
            navigate("/login")

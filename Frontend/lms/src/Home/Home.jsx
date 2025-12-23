@@ -3,6 +3,7 @@ export function Home(){
     return(
     <>
     <Nav/>
+    <h1>Home Page</h1>
     </>
     )
 }

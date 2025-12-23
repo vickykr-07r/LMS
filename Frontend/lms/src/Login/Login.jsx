@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../Redux/userSlice";
+import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../Utils/Firebase";
 export function Login(){
     let [logindata,setLoginData]=useState({
         email:"",
@@ -35,6 +38,20 @@ export function Login(){
         setLoading(false)
      }
     }
+    const googleauth=async ()=>{
+       try {
+        const response=await signInWithPopup(auth , provider)
+        console.log(response);
+        let email = response.user.email
+        let name  = response.user.displayName
+        const result = await axios.post(`${serverurl}/api/auth/googleauth`,{name,email},{withCredentials:true})
+        dispatch(setUserData(result.data))
+        alert(result.data.message)
+        navigate("/")
+       } catch (error) {
+        console.log(error)
+       }
+       }
     return(
         <>
         <div className={Style.container}>
@@ -57,10 +74,14 @@ export function Login(){
          <button>{loading ? <ClipLoader/> :"Login"}</button>
          </form>
          <div className={Style.forgotWrapper}>
-         <span onClick={() => navigate("/forget")}>Forget Password?</span>
+         <span onClick={() => navigate("/forget")}>Forgot Password?</span>
          </div>
          </div>
           
+         <div className={Style.logingoogle}>
+         <button onClick={googleauth}><FcGoogle /> Google</button>
+         </div>
+
          <div className={Style.footer}>
          <span>Don't have Account ?</span>
          <span onClick={()=>{navigate("/signup")}}>Register Now</span>

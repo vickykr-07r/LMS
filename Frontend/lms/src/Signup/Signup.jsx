@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../Redux/userSlice.js";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../Utils/Firebase.js";
 export function Signup(){
     let [signupdata,setSignupData]=useState({
         name:"",
@@ -40,6 +42,21 @@ export function Signup(){
     console.log(error);
     setLoading(false);
     }
+   }
+
+   const googleauth=async ()=>{
+   try {
+    const response=await signInWithPopup(auth , provider)
+    console.log(response);
+    let email = response.user.email
+    let name  = response.user.displayName
+    const result = await axios.post(`${serverurl}/api/auth/googleauth`,{name,email,role},{withCredentials:true})
+    dispatch(setUserData(result.data))
+    alert(result.data.message); 
+    navigate("/")
+   } catch (error) {
+    console.log(error)
+   }
    }
     return( 
         <>
@@ -79,8 +96,8 @@ export function Signup(){
          </div>
 
          <div className={Style.logingoogle}>
-         <button><FcGoogle /> Google</button>
-         </div> 
+         <button onClick={googleauth}><FcGoogle /> Google</button>
+         </div>
          
          <div className={Style.footer}>
          <span>Already have an Account ? </span>

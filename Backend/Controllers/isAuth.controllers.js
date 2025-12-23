@@ -222,3 +222,54 @@ try {
     });
 }
 };
+
+export const googleauth = async (req, res) => {
+  try {
+    const { name, email, role } = req.body;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      if (!role) {
+        return res.status(400).json({
+          message: "Role is required for first-time signup"
+        });
+      }
+
+      user = await User.create({
+        name,
+        email,
+        role
+      });
+    }
+
+    
+
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.SECRET_KEY,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    return res.status(200).json({
+      message: "Google authentication successful",
+      user
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+};
+
+
+
+
