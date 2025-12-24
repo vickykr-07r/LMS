@@ -6,7 +6,7 @@ import {getAuth, GoogleAuthProvider} from "firebase/auth"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  
+ 
   authDomain: "learning-management-syst-7d2fc.firebaseapp.com",
   projectId: "learning-management-syst-7d2fc",
   storageBucket: "learning-management-syst-7d2fc.firebasestorage.app",

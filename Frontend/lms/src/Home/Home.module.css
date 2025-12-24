@@ -1,0 +1,131 @@
+.hero {
+  position: relative;
+  width: 100%;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero h1,
+.hero h2,
+.hero .button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+}
+
+
+
+.hero h1 {
+  top: 8%;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  background: linear-gradient(180deg, #ffffff, #ffe0b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.hero h2 {
+  top: 17%;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #f5f5f5;
+  text-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+}
+
+.hero .button {
+  top: 28%;
+  display: flex;
+  gap: 24px;
+}
+
+.hero .button button {
+  padding: 18px 38px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hero .button button:first-child {
+  background: linear-gradient(135deg, #ff9800, #ffcc80);
+  color: #fff;
+}
+
+.hero .button button:last-child {
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+}
+
+
+
+@media (max-width: 1200px) {
+  .hero h1 { font-size: 4.4rem; }
+  .hero h2 { font-size: 2.6rem; }
+}
+
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 3.8rem; }
+  .hero h2 { font-size: 2.2rem; }
+  .hero .button button {
+    padding: 14px 30px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero h1 { font-size: 3.3rem; }
+  .hero h2 { font-size: 1.9rem; }
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+  .hero h2 { font-size: 1.6rem; }
+  .hero .button button {
+    padding: 12px 26px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.4rem; }
+  .hero h2 { font-size: 1.4rem; }
+  .hero .button button {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+@media (max-width: 444px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero .button {
+    top: 25%;
+  }
+
+  .hero .button button {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
+}
