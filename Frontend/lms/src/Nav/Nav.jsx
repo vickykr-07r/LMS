@@ -53,7 +53,7 @@ function Nav(){
             {
                 profileslidedown &&
                 <div className={Style.profileslidedown}>
-               <h1>My Profile</h1>
+               <h1 onClick={()=>{navigate("/profile")}}>My Profile</h1>
                <h1>My Course</h1>
              </div>
              }

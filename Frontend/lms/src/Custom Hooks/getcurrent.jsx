@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { ServerContext } from "../Context/Context.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../Redux/userSlice.js";
+import { setLoading, setUserData } from "../Redux/userSlice.js";
 const GetCurrentUser = () => {
   const { serverurl } = useContext(ServerContext);
           const dispatch=useDispatch()
@@ -15,7 +15,9 @@ const GetCurrentUser = () => {
         console.error(
           error.response?.data?.message || error.message
         );
-      }
+      }finally {
+       dispatch(setLoading(false))
+       }
     };
 
     getCurrentUser();
