@@ -20,7 +20,7 @@ function Profile(){
             <IoArrowBackCircleSharp />
           </div>
           <div className={Style.profile}>
-            <img src={userData.photourl =="" ? dp :null} alt="" />
+            <img src={userData.photourl|| dp} alt="" />
             <h2>{userData?.name}</h2>
             <h3>{userData?.role}</h3>
           </div>

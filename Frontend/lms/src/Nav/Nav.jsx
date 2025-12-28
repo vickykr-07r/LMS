@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setUserData } from "../Redux/userSlice";
 import { IoReorderThree } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
+import dp from "../assets/1bc39f6f1d788ad7bb599655da3d242e.jpg"
 function Nav(){
     let{userData}=useSelector(state=>state.user)
    let {serverurl}=useContext(ServerContext);
@@ -32,7 +33,7 @@ function Nav(){
             <img src="https://thumbs.dreamstime.com/b/lms-learning-management-system-acronym-software-application-administration-documentation-tracking-reporting-automation-264284719.jpg?w=992" alt="" />
            </div>
             <div className={Style.right}>
-             <img src="https://i1.rgstatic.net/ii/profile.image/745778318417921-1554818815059_Q512/Rod-Hart.jpg" alt="" onClick={() => setProfileslidedown(pre => !pre)}
+             <img src={userData.photourl || dp} alt="" onClick={() => setProfileslidedown(pre => !pre)}
 />
              {
                 userData?.role==="educator" &&
