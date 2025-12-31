@@ -33,7 +33,7 @@ function Nav(){
             <img src="https://thumbs.dreamstime.com/b/lms-learning-management-system-acronym-software-application-administration-documentation-tracking-reporting-automation-264284719.jpg?w=992" alt="" />
            </div>
             <div className={Style.right}>
-             <img src={userData.photourl || dp} alt="" onClick={() => setProfileslidedown(pre => !pre)}
+             <img src={userData?.photourl === "" ? dp : userData?.photourl} alt="" onClick={() => setProfileslidedown(pre => !pre)}
 />
              {
                 userData?.role==="educator" &&

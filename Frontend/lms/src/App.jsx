@@ -16,7 +16,6 @@ function App() {
   if(loading){
    return <div>Loading...</div>
   }
-  console.log(userData)
   return (
     <>
       <Routes>
