@@ -1,0 +1,52 @@
+import mongoose from "mongoose"
+
+const courseSchema= new mongoose.Schema({
+    title:{
+        type:String,
+        required
+    },
+    subtitle:{
+        type:String,
+    },
+    description:{
+        type:String
+    },
+    category:{
+        type:String,
+        required
+    },
+    level:{
+        type:String,
+        enum:["Beginner","Intermediate","Advance"]
+    },
+    price:{
+        type:Number
+    },
+    thumbnail:{
+        type:String
+    },
+    enrolledstudents:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
+    lectures:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Lecture"
+    }],
+    creator:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
+    ispublished:{
+        type:Boolean,
+        default:false
+    },
+    reviews:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Review"
+    }]
+},{timestamps:true})
+
+const Course=mongoose.model("Course",courseSchema)
+
+export default Course;
