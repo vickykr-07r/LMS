@@ -1,6 +1,7 @@
 import Course from "../Models/courseModel.js";
 import uploadoncloudinary from "../Config/Cloudinary.js";
-const createCourse=async(req,res)=>{
+
+export const createCourse=async(req,res)=>{
     try {
         let{title,category}=req.body;
         if(!title || !category){
@@ -21,7 +22,7 @@ const createCourse=async(req,res)=>{
     }
 }
 
-const getpublishedcourse=async(req,res)=>{
+export const getpublishedcourse=async(req,res)=>{
     try {
         const course=await Course.find({ispublished:true})
         if(!course){
@@ -37,7 +38,7 @@ const getpublishedcourse=async(req,res)=>{
     }
 }
 
-const getcreatorcourses=async(req,res)=>{
+export const getcreatorcourses=async(req,res)=>{
 try {
     const course=await Course.find({creator:req.userId})
      if(!course){
@@ -54,7 +55,7 @@ try {
 }
 }
 
-const editcourse=async(req,res)=>{
+export const editcourse=async(req,res)=>{
 try {
     let {courseId}=req.params;
     let {title,subtitle,description,category,level,ispublished,price}=req.body;
@@ -70,4 +71,41 @@ try {
       message: error.message
     });
 }
+}
+
+export const getcoursebyid=async(req,res)=>{
+try {
+    let {courseId}=req.params;
+    let course=await Course.findById(courseId);
+    if(!course){
+        return res.status(400).json({
+            message:"course not found"
+        })
+    }
+    return res.status(200).json(course)
+} catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+}
+}
+
+export const removecourse=async(req,res)=>{
+    try {
+        let {courseId}=req.params;
+    let course=await Course.findById(courseId);
+    if(!course){
+        return res.status(400).json({
+            message:"course not found"
+        })
+    }
+    course=await Course.findByIdAndDelete(courseId,{new:true})
+    return res.status(200).json({
+        message:"course removed"
+    })
+    } catch (error) {
+        return res.status(500).json({
+      message: error.message
+    });
+    }
 }
