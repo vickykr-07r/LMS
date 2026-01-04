@@ -1,0 +1,150 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f6fa;
+  padding: 30px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 18px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.left svg {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.left h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.right button {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.courses {
+  margin-top: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.table td img {
+  width: 90px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.table td span {
+  font-weight: 600;
+}
+
+.table td:nth-child(3) {
+  width: fit-content;
+}
+
+.table td:nth-child(3) {
+  color: #b45309;
+}
+
+.table td:nth-child(3)::before {
+  content: "";
+}
+
+.table td:nth-child(3) {
+  background: #fef3c7;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+  display: inline-block;
+}
+
+.table td svg {
+  font-size: 18px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.table td svg:hover {
+  color: #6366f1;
+}
+
+@media (max-width: 768px) {
+  .table table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table tr {
+    padding: 16px;
+  }
+
+  .table th {
+    display: none;
+  }
+
+  .table td {
+    border: none;
+    padding: 10px 0;
+  }
+
+  .table td:first-child {
+    justify-content: flex-start;
+  }
+}

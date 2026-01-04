@@ -8,6 +8,8 @@ import Profile from './Profile/Profile.jsx'
 import { useSelector } from 'react-redux'
 import ForgetPassword from './ForgetPassword/ForgetPassword.jsx'
 import Editprofile from './Edit Profile/Editprofile.jsx'
+import Dashboard from './Educator/Dashboard/Dashboard.jsx'
+import Courses from './Educator/Courses/Courses.jsx'
 function App() {
   useGetCurrentUser()
 
@@ -30,6 +32,10 @@ function App() {
         <Route path='/forget' element={<ForgetPassword />} />
 
         <Route path='/editprofile' element={userData ? <Editprofile /> : <Navigate to="/login" />}/>
+
+        <Route path="/dashboard" element={userData?.role === "educator" ? <Dashboard /> : <Navigate to="/login" />}/>
+
+         <Route path='/courses' element={userData ? <Courses /> : <Navigate to="/login" />}/>
       </Routes>
     </>
   )
