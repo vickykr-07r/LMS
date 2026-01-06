@@ -26,6 +26,9 @@ app.use("/api/auth",authRouter)
 import { userRouter } from "./Routes/user.routes.js";
 app.use("/api/user",userRouter);
 
+import { courseRouter } from "./Routes/course.routes.js";
+app.use("/api/course",courseRouter)
+
 app.listen(process.env.PORT,()=>{
     console.log("the app is listening")
     connect();

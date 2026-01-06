@@ -1,5 +1,5 @@
-import express from express;
-let courseRouter=express.Router();
+import express from "express";
+export let courseRouter=express.Router();
 import upload from "../Middlewares/multer.js";
 import { createCourse } from "../Controllers/courses.js";
 import { getpublishedcourse } from "../Controllers/courses.js";
@@ -13,4 +13,4 @@ courseRouter.get("/getpublished",getpublishedcourse)
 courseRouter.get("/getcreator",isAuth,getcreatorcourses)
 courseRouter.post("editcourse/:courseId",isAuth,upload.single("thumbnail"),editcourse)
 courseRouter.get("/getcoursebyid/:courseId",isAuth,getcoursebyid)
-courseRouter.delete("/remove/:courseId",isAuth,removecourse)
+courseRouter.delete("/remove/:courseId",isAuth,removecourse) 

@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const courseSchema= new mongoose.Schema({
     title:{
         type:String,
-        required
+        required:true
     },
     subtitle:{
         type:String,
@@ -13,7 +13,7 @@ const courseSchema= new mongoose.Schema({
     },
     category:{
         type:String,
-        required
+        required:true
     },
     level:{
         type:String,

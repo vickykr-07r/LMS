@@ -10,8 +10,11 @@ import ForgetPassword from './ForgetPassword/ForgetPassword.jsx'
 import Editprofile from './Edit Profile/Editprofile.jsx'
 import Dashboard from './Educator/Dashboard/Dashboard.jsx'
 import Courses from './Educator/Courses/Courses.jsx'
+import CreateCourses from './Educator/CreateCourses/CreateCourses.jsx'
+import getCreatorCourses from './Custom Hooks/getCreatorCourses.jsx'
 function App() {
   useGetCurrentUser()
+  getCreatorCourses()
 
   const { userData,loading } = useSelector(state => state.user)
 
@@ -36,6 +39,8 @@ function App() {
         <Route path="/dashboard" element={userData?.role === "educator" ? <Dashboard /> : <Navigate to="/login" />}/>
 
          <Route path='/courses' element={userData ? <Courses /> : <Navigate to="/login" />}/>
+
+         <Route path='/createcourses' element={userData ? <CreateCourses /> : <Navigate to="/login" />}/>
       </Routes>
     </>
   )

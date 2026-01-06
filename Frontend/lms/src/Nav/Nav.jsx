@@ -37,7 +37,7 @@ function Nav(){
 />
              {
                 userData?.role==="educator" &&
-                <button>Dashboard</button>
+                <button onClick={()=>{navigate("/dashboard")}}>Dashboard</button>
              }
              {
                 userData && 

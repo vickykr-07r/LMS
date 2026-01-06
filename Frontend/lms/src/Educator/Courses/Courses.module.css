@@ -1,18 +1,15 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  background: #f5f6fa;
-  padding: 30px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  padding: 26px 30px;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  padding: 18px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 28px;
 }
 
 .left {
@@ -22,129 +19,159 @@
 }
 
 .left svg {
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
+  color: #4f46e5;
 }
 
 .left h1 {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .right button {
-  padding: 10px 20px;
-  background: #6366f1;
+  padding: 11px 20px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35);
+  transition: all 0.3s ease;
+}
+
+.right button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.45);
 }
 
 .courses {
-  margin-top: 25px;
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
 }
 
-.table table {
+.table {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.08);
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.table th {
-  padding: 14px 20px;
+thead {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+th {
+  padding: 16px 18px;
   text-align: left;
   font-size: 14px;
   font-weight: 600;
-  color: #6b7280;
-  border-bottom: 1px solid #e5e7eb;
+  color: #ffffff;
 }
 
-.table td {
-  padding: 16px 20px;
+td {
+  padding: 16px 18px;
   font-size: 14px;
-  font-weight: 500;
-  color: #111827;
-  border-bottom: 1px solid #e5e7eb;
+  color: #334155;
 }
 
-.table td:first-child {
+tbody tr {
+  transition: all 0.25s ease;
+}
+
+tbody tr:hover {
+  background: #f1f5ff;
+}
+
+td:first-child {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
-.table td img {
-  width: 90px;
-  height: 50px;
-  border-radius: 6px;
+td img {
+  width: 80px;
+  height: 56px;
+  border-radius: 12px;
   object-fit: cover;
   background: #e5e7eb;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.table td span {
+td img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+td span {
   font-weight: 600;
 }
 
-.table td:nth-child(3) {
-  width: fit-content;
+td:nth-child(2) {
+  font-weight: 600;
+  color: #16a34a;
 }
 
-.table td:nth-child(3) {
-  color: #b45309;
+td:nth-child(3) {
+  font-weight: 600;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.table td:nth-child(3)::before {
+td:nth-child(3)::before {
   content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
 }
 
-.table td:nth-child(3) {
-  background: #fef3c7;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #92400e;
-  display: inline-block;
+tbody tr td:nth-child(3):has(:contains("published"))::before {
+  background: #22c55e;
 }
 
-.table td svg {
+td svg {
   font-size: 18px;
   cursor: pointer;
-  color: #374151;
+  color: #6366f1;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.table td svg:hover {
-  color: #6366f1;
+td svg:hover {
+  transform: scale(1.15);
+  color: #4f46e5;
 }
 
 @media (max-width: 768px) {
-  .table table,
-  .table thead,
-  .table tbody,
-  .table th,
-  .table td,
-  .table tr {
-    display: block;
+  .container {
+    padding: 20px;
   }
 
-  .table tr {
-    padding: 16px;
+  .left h1 {
+    font-size: 20px;
   }
 
-  .table th {
-    display: none;
+  .right button {
+    padding: 9px 16px;
+    font-size: 13px;
   }
 
-  .table td {
-    border: none;
-    padding: 10px 0;
-  }
-
-  .table td:first-child {
-    justify-content: flex-start;
+  th,
+  td {
+    padding: 12px;
+    font-size: 13px;
   }
 }
