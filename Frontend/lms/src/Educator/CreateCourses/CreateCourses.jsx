@@ -3,10 +3,12 @@ import Style from "../CreateCourses/CreateCourses.module.css"
 import axios from "axios";
 import { useContext, useState } from "react";
 import { ServerContext } from "../../Context/Context";
+import { useNavigate } from "react-router-dom";
 function CreateCourses(){
     let{serverurl}=useContext(ServerContext)
     let[title,setTitle]=useState("");
     let[category,setCategory]=useState("");
+    let navigate=useNavigate();
     async function handlesubmit(e){
         e.preventDefault();
         try {
@@ -40,7 +42,7 @@ function CreateCourses(){
         <option value="Other">Other</option>
 </select>
 
-        <button>Create Courses</button>
+        <button onClick={()=>{navigate("/courses")}}>Create Courses</button>
        </form>
       </div>
      </div>
@@ -48,6 +50,6 @@ function CreateCourses(){
     </>
     
 )
-}
+} 
 
 export default CreateCourses;

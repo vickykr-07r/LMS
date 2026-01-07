@@ -39,7 +39,7 @@ function Courses(){
         </td>
         <td>${item.price}</td>
         <td>{item.ispublished ? "published" : "draft"}</td>
-        <td><FaRegEdit /></td>
+        <td onClick={() => navigate(`/editcourse/${item._id}`)}><FaRegEdit /></td>
       </tr>
     ))}
   </tbody>

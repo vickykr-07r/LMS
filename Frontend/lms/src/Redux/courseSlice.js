@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let courseSlice=createSlice({
     name:"courses",
     initialState:{
-    creatorCoursesData:null
+    creatorCoursesData:[]
     },
     reducers:{
         setCreatorCoursesData:(state,actions)=>{
