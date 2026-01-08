@@ -23,7 +23,7 @@ function CreateCourses(){
     <div className={Style.container}>
      <div className={Style.box}>
       <div className={Style.nav}>
-       <IoMdArrowRoundBack />
+       <IoMdArrowRoundBack onClick={()=>{navigate("/courses")}}/>
        <h1>Create Courses</h1>
       </div>
       <div className={Style.form}>

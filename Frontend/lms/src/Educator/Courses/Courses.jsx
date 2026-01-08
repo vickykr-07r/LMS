@@ -11,7 +11,7 @@ function Courses(){
         <div className={Style.container}>
          <div className={Style.nav}>
           <div className={Style.left}>
-            <IoMdArrowRoundBack />
+            <IoMdArrowRoundBack onClick={()=>{navigate("/dashboard")}}/>
             <h1>Courses</h1>
           </div>
           <div className={Style.right}>
@@ -34,11 +34,12 @@ function Courses(){
     {creatorCoursesData.map((item, index) => (
       <tr key={index}>
         <td>
-          <img src="" alt="" />
+          <img src={item.thumbnail} alt="" />
           <span>{item.title}</span>
         </td>
         <td>${item.price}</td>
-        <td>{item.ispublished ? "published" : "draft"}</td>
+        <td><span className={item.ispublished ? Style.published : Style.draft}>{item.ispublished ? "Published" : "Draft"}</span></td>
+
         <td onClick={() => navigate(`/editcourse/${item._id}`)}><FaRegEdit /></td>
       </tr>
     ))}

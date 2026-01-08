@@ -55,23 +55,48 @@ try {
 }
 }
 
-export const editcourse=async(req,res)=>{
-try {
-    let {courseId}=req.params;
-    let {title,subtitle,description,category,level,ispublished,price}=req.body;
-    let thumbnail
-    if(thumbnail){
-        thumbnail=await uploadoncloudinary(req.file.path)
+export const editcourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { title, subtitle, description, category, level, ispublished, price } = req.body;
+
+    let thumbnail;
+
+   
+    if (req.file) {
+      const uploadResult = await uploadoncloudinary(req.file.path);
+      thumbnail = uploadResult
     }
-    let updatecourse = {title,subtitle,description,category,level,ispublished,price,thumbnail}
-    let course=await Course.findByIdAndUpdate(courseId,updatecourse,{new:true})
-    return res.status(200).json(course)
-} catch (error) {
+
+    const updatecourse = {
+      title,
+      subtitle,
+      description,
+      category,
+      level,
+      ispublished,
+      price,
+    };
+
+    if (thumbnail) {
+      updatecourse.thumbnail = thumbnail;
+    }
+
+    const course = await Course.findByIdAndUpdate(
+      courseId,
+      updatecourse,
+      { new: true }
+    );
+
+    return res.status(200).json(course);
+
+  } catch (error) {
     return res.status(500).json({
-      message: error.message
+      message: error.message,
     });
-}
-}
+  }
+};
+
 
 export const getcoursebyid=async(req,res)=>{
 try {

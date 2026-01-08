@@ -1,177 +1,157 @@
 .container {
-  width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #eef2ff, #f8fafc);
-  padding: 26px 30px;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  padding: 40px 50px;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .left svg {
-  font-size: 28px;
+  font-size: 26px;
   cursor: pointer;
   color: #4f46e5;
 }
 
 .left h1 {
-  font-size: 24px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #4f46e5, #9333ea);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 26px;
+  font-weight: 600;
+  color: #0f172a;
 }
 
 .right button {
-  padding: 11px 20px;
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   border: none;
-  border-radius: 999px;
-  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35);
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .right button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.45);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
 }
 
 .courses {
-  width: 100%;
-}
-
-.table {
   background: #ffffff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.08);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
 }
 
-table {
+.table table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead {
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
+.table thead {
+  background: #f1f5f9;
 }
 
-th {
-  padding: 16px 18px;
+.table th {
+  padding: 16px;
   text-align: left;
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: #475569;
 }
 
-td {
-  padding: 16px 18px;
-  font-size: 14px;
-  color: #334155;
+.table td {
+  padding: 18px 16px;
+  border-top: 1px solid #e2e8f0;
+  vertical-align: middle;
+  font-size: 15px;
+  color: #0f172a;
 }
 
-tbody tr {
-  transition: all 0.25s ease;
+.table tbody tr {
+  transition: 0.25s;
 }
 
-tbody tr:hover {
-  background: #f1f5ff;
+.table tbody tr:hover {
+  background: #f8fafc;
 }
 
-td:first-child {
+.table td:first-child {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-td img {
+.table img {
   width: 80px;
-  height: 56px;
-  border-radius: 12px;
+  height: 48px;
+  border-radius: 8px;
   object-fit: cover;
-  background: #e5e7eb;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid #e5e7eb;
 }
 
-td img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+.table span {
+  font-weight: 500;
 }
 
-
-td span {
-  font-weight: 600;
-}
-
-td:nth-child(2) {
-  font-weight: 600;
+.published {
   color: #16a34a;
-}
-
-td:nth-child(3) {
   font-weight: 600;
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-td:nth-child(3)::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #f59e0b;
+.draft {
+  color: #ea580c;
+  font-weight: 600;
 }
 
-tbody tr td:nth-child(3):has(:contains("published"))::before {
-  background: #22c55e;
-}
-
-td svg {
+.table td:last-child {
   font-size: 18px;
   cursor: pointer;
-  color: #6366f1;
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: #4f46e5;
 }
 
-td svg:hover {
-  transform: scale(1.15);
-  color: #4f46e5;
+.table td:last-child:hover {
+  color: #1d4ed8;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: 24px;
   }
 
-  .left h1 {
-    font-size: 20px;
+  .table thead {
+    display: none;
   }
 
-  .right button {
-    padding: 9px 16px;
-    font-size: 13px;
+  .table tr {
+    display: block;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 16px;
   }
 
-  th,
-  td {
+  .table td {
+    display: flex;
+    justify-content: space-between;
     padding: 12px;
-    font-size: 13px;
+  }
+
+  .table td:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table img {
+    width: 100%;
+    height: 160px;
   }
 }
