@@ -5,6 +5,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { ServerContext } from "../../Context/Context";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch, useSelector } from "react-redux";
+import { setCreatorCoursesData } from "../../Redux/courseSlice";
 
 function EditCourse() {
   const ref = useRef();
@@ -26,6 +28,9 @@ function EditCourse() {
   const [pageLoading, setPageLoading] = useState(true);
   const [btnLoading, setBtnLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const dispatch=useDispatch();
+  const {creatorCoursesData} = useSelector(state=>state.course)
 
   function handleimage(e) {
     const image = e.target.files[0];
@@ -80,14 +85,24 @@ function EditCourse() {
     }
 
     try {
-      await axios.post(
-        `${serverurl}/api/course/editcourse/${courseId}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      let result=await axios.post(`${serverurl}/api/course/editcourse/${courseId}`,formData,{withCredentials: true});
+      let updateData=result.data
+      if(updateData.ispublished){
+        const updateCourses=creatorCoursesData.map((c)=>{
+           return c._id===courseId ? updateData :c ;
+        })
+
+        if(!creatorCoursesData.some((c)=>{
+        return c._id ===courseId
+        }))
+        updateCourses.push(updateData)
+        dispatch(setCreatorCoursesData(updateCourses))
+      }else{
+        const filtercourse=creatorCoursesData.filter((c)=>{
+      return c._id != courseId
+      })
+         dispatch(setCreatorCoursesData(filtercourse))
+      }
       navigate("/courses");
     } catch (error) {
       console.log(error);
@@ -105,6 +120,11 @@ function EditCourse() {
         `${serverurl}/api/course/remove/${courseId}`,
         { withCredentials: true }
       );
+
+      const filtercourse=creatorCoursesData.filter((c)=>{
+      return c._id != courseId
+      })
+       dispatch(setCreatorCoursesData(filtercourse))
       navigate("/courses");
     } catch (error) {
       console.log(error);

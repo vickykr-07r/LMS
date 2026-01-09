@@ -37,7 +37,7 @@ function Courses(){
           <img src={item.thumbnail} alt="" />
           <span>{item.title}</span>
         </td>
-        <td>${item.price}</td>
+        <td>₹{item.price}</td>
         <td><span className={item.ispublished ? Style.published : Style.draft}>{item.ispublished ? "Published" : "Draft"}</span></td>
 
         <td onClick={() => navigate(`/editcourse/${item._id}`)}><FaRegEdit /></td>

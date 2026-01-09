@@ -11,8 +11,10 @@ import { RiMobileDownloadFill } from "react-icons/ri";
 import { IoMdAnalytics } from "react-icons/io";
 import { SiPreact } from "react-icons/si";
 import { FaHackerrank } from "react-icons/fa";
-
+import CardPage from "../CardPage/CardPage.jsx"
+import { useNavigate } from "react-router-dom"
 export function Home(){
+    let navigate=useNavigate();
     return(
     <>
 
@@ -23,7 +25,7 @@ export function Home(){
     <h1>Grow Your Skills To Advance</h1>
     <h2>Your Career Path</h2>
     <div className={Style.button}>
-        <button>View All Courses</button>
+        <button onClick={()=>{navigate("/allcourses")}}>View All Courses</button>
         <button>Search With Ai</button>
     </div>
    </div>
@@ -47,6 +49,7 @@ export function Home(){
    <Explore Icon={SiPreact} text="Ai Tools" />
    </div>
    </div>
+   <CardPage/>
     </>
     )
 }

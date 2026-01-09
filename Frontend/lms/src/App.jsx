@@ -13,6 +13,7 @@ import Courses from './Educator/Courses/Courses.jsx'
 import CreateCourses from './Educator/CreateCourses/CreateCourses.jsx'
 import getCreatorCourses from './Custom Hooks/getCreatorCourses.jsx'
 import EditCourse from './Educator/EditCourse/EditCourse.jsx'
+import Allcourses from './AllCourses/Allcourses.jsx'
 function App() {
   useGetCurrentUser()
   getCreatorCourses()
@@ -40,6 +41,8 @@ function App() {
         <Route path="/dashboard" element={userData?.role === "educator" ? <Dashboard /> : <Navigate to="/login" />}/>
 
          <Route path='/courses' element={userData ? <Courses /> : <Navigate to="/login" />}/>
+
+         <Route path='/allcourses' element={userData ? <Allcourses/> : <Navigate to="/login" />}/>
 
          <Route path='/createcourses' element={userData ? <CreateCourses /> : <Navigate to="/login" />}/>
 

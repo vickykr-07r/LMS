@@ -1,0 +1,127 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background: linear-gradient(180deg, #f8fafc, #eef2f7);
+}
+
+.left {
+  width: 20%;
+  min-width: 340px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.left svg {
+  font-size: 22px;
+  color: #111827;
+  cursor: pointer;
+}
+
+.left h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.leftbox {
+  padding: 22px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.leftbox button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.leftbox button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+}
+
+.checkbox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px 12px;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0f172a;
+  cursor: pointer;
+}
+
+.checkbox label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f2937;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.checkbox input:checked + label {
+  color: #0f172a;
+}
+
+.right {
+  width: 80%;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+  align-items: stretch;
+}
+
+
+@media (max-width: 900px) {
+  .left {
+    width: 35%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+.right > * {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
