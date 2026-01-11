@@ -157,3 +157,48 @@ try {
     })
 }
 }
+
+export const getcourselecture=async(req,res)=>{
+try {
+    let {courseId}=req.params;
+    const course=await Course.findById(courseId);
+    if(!course){
+        return res.status(400).json({
+            message:"Course is not found"
+        })
+    }
+    await course.populate("lectures")
+    await course.save();
+    return res.status(200).json(course)
+} catch (error) {
+    return res.status(500).json({
+        message:`failed to create lecture ${error}`
+    })
+}
+}
+
+export const editlecture=async(req,res)=>{
+try {
+    let {lectureId}=req.params;
+    const {ispreviewfree,lecturetitle}=req.body
+    const lecture=await Lecture.findById(lectureId);
+    if(!lecture){
+         return res.status(400).json({
+            message:"Course is not found"
+        })
+    }
+    let videourl;
+    if(req.file){
+        videourl=await uploadoncloudinary(req.file.path)
+    }
+    lecture.videourl=videourl;
+    lecture.ispreviewfree=ispreviewfree;
+    lecture.lecturetitle=lecturetitle;
+    await lecture.save();
+    return res.status(200).json(lecture)
+} catch (error) {
+    return res.status(500).json({
+        message:`failed to edit lecture ${error}`
+    })
+}
+}
