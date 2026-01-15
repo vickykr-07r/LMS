@@ -202,3 +202,24 @@ try {
     })
 }
 }
+
+export const removelecture=async(req,res)=>{
+    try {
+        let {lectureId} =req.params;
+        const lecture=await Lecture.findByIdAndDelete(lectureId)
+        if(lecture){
+            return res.status(400).json({
+                message:"Lecture is not found"
+            })
+        }
+        await Course.updateOne(
+            {lectures:lectureId},
+            {$pull:{lectures:lectureId}}
+        )
+        return res.status(200).json({message:"Lecture Removed"})
+    } catch (error) {
+        return res.status(500).json({
+        message:`failed to remove lecture ${error}`
+    })
+    }
+}
