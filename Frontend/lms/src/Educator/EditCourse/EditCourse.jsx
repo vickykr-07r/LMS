@@ -24,7 +24,7 @@ function EditCourse() {
   const [price, setPrice] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [publish, setPublish] = useState(false);
-
+  const [selectCourse,setSelectCourse]=useState("");
   const [pageLoading, setPageLoading] = useState(true);
   const [btnLoading, setBtnLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
@@ -47,6 +47,7 @@ function EditCourse() {
           { withCredentials: true }
         );
         setCourseData(result.data);
+        setSelectCourse(result.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -150,7 +151,7 @@ function EditCourse() {
             <h1>Edit Courses</h1>
           </div>
           <div className={Style.navright}>
-            <button>Go To Lecture Page</button>
+            <button onClick={()=>{navigate(`/createlecture/${selectCourse?._id}`)}}>Go To Lecture Page</button>
           </div>
         </div>
 

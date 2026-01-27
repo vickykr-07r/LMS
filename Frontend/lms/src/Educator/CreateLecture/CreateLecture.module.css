@@ -1,0 +1,99 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.box {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+.heading h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.heading p {
+  font-size: 14px;
+  color: #666;
+}
+
+.box input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 18px;
+  transition: border 0.2s;
+}
+
+.box input:focus {
+  border-color: #4f46e5;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.button button {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+}
+
+.button button:first-child {
+  background: #e5e7eb;
+  color: #333;
+}
+
+.button button:first-child:hover {
+  background: #d1d5db;
+}
+
+.button button:last-child {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.button button:last-child:hover {
+  background: #4338ca;
+}
+
+.lecturedetail {
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.lecturedetail p {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.lecturedetail p:last-child {
+  margin-bottom: 0;
+}
