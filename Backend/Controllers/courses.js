@@ -138,12 +138,12 @@ export const createlecture=async(req,res)=>{
 try {
     const {lecturetitle}=req.body;
     const {courseId}=req.params;
-    if(lecturetitle || courseId){
+    if(!lecturetitle || !courseId){
         return res.status(400).json({
             message:"lecturetitle is required"
         })
     }
-    const lecture=await Lecture.create(lecturetitle)
+    const lecture = await Lecture.create({ lecturetitle: lecturetitle})
     const course=await Course.findById(courseId)
     if(course){
         course.lectures.push(lecture._id)

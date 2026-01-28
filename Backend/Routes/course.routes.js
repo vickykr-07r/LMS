@@ -16,6 +16,6 @@ courseRouter.get("/getcoursebyid/:courseId",isAuth,getcoursebyid)
 courseRouter.delete("/remove/:courseId",isAuth,removecourse) 
 
 courseRouter.post("/createlecture/:courseId",isAuth,createlecture)
-courseRouter.post("/courselecture/:courseId",isAuth,getcourselecture)
+courseRouter.get("/courselecture/:courseId",isAuth,getcourselecture)
 courseRouter.post("/editlecture/:lectureId",isAuth,upload.single("videoUrl"),editlecture)
 courseRouter.delete("/removelecture/:lectureId",isAuth,removelecture)
