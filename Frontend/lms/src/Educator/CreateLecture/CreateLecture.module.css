@@ -1,49 +1,44 @@
 .container {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   background: #f4f6f8;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box {
   width: 100%;
-  max-width: 520px;
+  max-width: 650px;
   background: #ffffff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-.heading {
-  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .heading h1 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
-  color: #222;
   margin-bottom: 6px;
 }
 
 .heading p {
   font-size: 14px;
   color: #666;
+  margin-bottom: 20px;
 }
 
-.box input {
+input {
   width: 100%;
   padding: 12px 14px;
-  font-size: 14px;
-  border-radius: 6px;
+  font-size: 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
-  margin-bottom: 18px;
-  transition: border 0.2s;
+  margin-bottom: 20px;
 }
 
-.box input:focus {
+input:focus {
   border-color: #4f46e5;
 }
 
@@ -51,49 +46,62 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .button button {
   flex: 1;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
+  padding: 12px 0;
+  font-size: 15px;
+  border-radius: 8px;
   border: none;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
+
 
 .button button:first-child {
   background: #e5e7eb;
-  color: #333;
+  color: #111;
 }
 
 .button button:first-child:hover {
   background: #d1d5db;
 }
 
+
 .button button:last-child {
   background: #4f46e5;
-  color: #ffffff;
+  color: white;
 }
 
 .button button:last-child:hover {
   background: #4338ca;
 }
 
-.lecturedetail {
+
+.lecturerow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 8px;
   background: #f9fafb;
-  border-radius: 6px;
-  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 10px;
 }
 
-.lecturedetail p {
-  font-size: 14px;
-  color: #374151;
-  margin-bottom: 6px;
+.lecturerow span:first-child {
+  font-size: 15px;
+  color: #111;
 }
 
-.lecturedetail p:last-child {
-  margin-bottom: 0;
+.lecturerow span:last-child {
+  color: #4f46e5;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.lecturerow span:last-child:hover {
+  color: #4338ca;
 }

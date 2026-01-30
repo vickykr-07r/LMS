@@ -37,6 +37,7 @@ function Createlecture(){
             try {
                let result = await axios.get(`${serverurl}/api/course/courselecture/${courseId}`,{withCredentials:true})
             dispatch(setLectureData(result.data)); 
+            console.log(result.data)
             } catch (error) {
                 console.log(error)
             }
@@ -59,12 +60,16 @@ function Createlecture(){
          <button onClick={handlecreateLecture}>{loading ? <ClipLoader size={30} color="white"/> : "create Lecture"}</button>
         </div>
         
-        {lectureData.map((lecture,index)=>{
-         return <div key={index}>
-          <span>Lecture-{index+1}{lecture.lecturetitle}</span>
-          <span><BiSolidEdit /></span>
-         </div>
-        })}
+        {lectureData?.lectures?.map((lecture, index) => (
+        <div key={lecture._id} className={Style.lecturerow}>
+        <span>
+        Lecture-{index + 1}: {lecture.lecturetitle}
+        </span>
+
+        <span><BiSolidEdit /></span>
+        </div>
+        ))}
+
 
         </div>
         </div>
