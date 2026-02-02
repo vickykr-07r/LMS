@@ -1,0 +1,118 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f4f6;
+  padding: 20px;
+}
+
+.box {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.head svg {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.head h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.removeBtn {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form input[type="text"],
+.form input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.form input[type="text"]:focus,
+.form input[type="file"]:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+input[type="file"]::file-selector-button {
+  background: #374151;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox span {
+  font-size: 14px;
+  color: #374151;
+}
+
+.updateBtn {
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.updateBtn:hover {
+  background: #111827;
+}

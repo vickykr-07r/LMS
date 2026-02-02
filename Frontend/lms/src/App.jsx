@@ -15,6 +15,7 @@ import getCreatorCourses from './Custom Hooks/getCreatorCourses.jsx'
 import EditCourse from './Educator/EditCourse/EditCourse.jsx'
 import Allcourses from './AllCourses/Allcourses.jsx'
 import Createlecture from './Educator/CreateLecture/CreateLecture.jsx'
+import EditLecture from './Educator/EditLectures/EditLectures.jsx'
 function App() {
   useGetCurrentUser()
   getCreatorCourses()
@@ -50,6 +51,8 @@ function App() {
          <Route path='/editcourse/:courseId' element={userData ? <EditCourse /> : <Navigate to="/login" />}/>
 
          <Route path='/createlecture/:courseId' element={userData ? <Createlecture /> : <Navigate to="/login" />}/>
+
+         <Route path='/editlecture/:courseId/:lectureId' element={userData ? <EditLecture /> : <Navigate to="/login" />}/>
       </Routes>
     </>
   )

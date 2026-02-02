@@ -66,7 +66,7 @@ function Createlecture(){
         Lecture-{index + 1}: {lecture.lecturetitle}
         </span>
 
-        <span><BiSolidEdit /></span>
+        <span onClick={()=>{navigate(`/editlecture/${courseId}/${lecture._id}`)}}><BiSolidEdit /></span>
         </div>
         ))}
 
