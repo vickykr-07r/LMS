@@ -1,9 +1,11 @@
 import Style from "../Cards/Cards.module.css"
+import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
-function Cards({thumbnail,title,category,price,id}){
+function Cards({thumbnail,title,category,price,_id}){
+    let navigate=useNavigate();
     return(
         <>
-        <div className={Style.box}>
+        <div className={Style.box} onClick={()=>{navigate(`/viewcourse/${_id}`)}}>
             <div className={Style.upside}>
                  <img src={thumbnail} alt="" />
             </div>

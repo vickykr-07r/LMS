@@ -4,13 +4,14 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import axios from "axios";
 import { useContext } from "react";
 import { ServerContext } from "../../Context/Context";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function EditLecture(){
     let[title,setTitle]=useState("");
     let[file,setFile]=useState(null);
     let[preview,setPreview]=useState(false);
-    let {lectureId}=useParams();
+    let {lectureId,courseId}=useParams();
     let {serverurl}=useContext(ServerContext)
+    let navigate=useNavigate();
    function handleFile(event) {
     const video = event.target.files?.[0];
      if (!video) return;
@@ -31,6 +32,16 @@ function EditLecture(){
         console.log(error)
        }
     }
+
+    async function removelecture(){
+      try {
+        let result =await axios.delete(`${serverurl}/api/course/removelecture/${lectureId}`,{withCredentials:true});
+        console.log(result.data);
+        navigate(`/createlecture/${courseId}`)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     return(
         <>
         <div className={Style.container}>
@@ -41,7 +52,7 @@ function EditLecture(){
       <h1>Update Your Lecture</h1>
     </div>
 
-    <button className={Style.removeBtn}>Remove Lecture</button>
+    <button className={Style.removeBtn} onClick={removelecture}>Remove Lecture</button>
 
     <div className={Style.form}>
       <label>Title</label>

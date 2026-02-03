@@ -24,7 +24,7 @@ export const createCourse=async(req,res)=>{
 
 export const getpublishedcourse=async(req,res)=>{
     try {
-        const course=await Course.find({ispublished:true})
+        const course=await Course.find({ispublished:true}).populate("lectures")
         if(!course){
             return res.status(400).json({
                 message:"courses not found"
@@ -207,7 +207,7 @@ export const removelecture=async(req,res)=>{
     try {
         let {lectureId} =req.params;
         const lecture=await Lecture.findByIdAndDelete(lectureId)
-        if(lecture){
+        if(!lecture){
             return res.status(400).json({
                 message:"Lecture is not found"
             })
