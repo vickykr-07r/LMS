@@ -22,21 +22,25 @@ export const createCourse=async(req,res)=>{
     }
 }
 
-export const getpublishedcourse=async(req,res)=>{
-    try {
-        const course=await Course.find({ispublished:true}).populate("lectures")
-        if(!course){
-            return res.status(400).json({
-                message:"courses not found"
-            })
-        }
-        return res.status(200).json(course)
-    } catch (error) {
-          return res.status(500).json({
+export const getpublishedcourse = async (req, res) => {
+  try {
+    const courses = await Course
+      .find({ ispublished: true })
+      .populate("lectures");
+
+    if (courses.length === 0) {
+      return res.status(404).json({
+        message: "No published courses found"
+      });
+    }
+
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({
       message: error.message
     });
-    }
-}
+  }
+};
 
 export const getcreatorcourses=async(req,res)=>{
 try {
@@ -97,22 +101,28 @@ export const editcourse = async (req, res) => {
   }
 };
 
-export const getcoursebyid=async(req,res)=>{
-try {
-    let {courseId}=req.params;
-    let course=await Course.findById(courseId);
-    if(!course){
-        return res.status(400).json({
-            message:"course not found"
-        })
+export const getcoursebyid = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+
+    const course = await Course
+      .findById(courseId)
+      .populate("lectures");   // ✅ THIS LINE IS THE KEY
+
+    if (!course) {
+      return res.status(404).json({
+        message: "course not found"
+      });
     }
-    return res.status(200).json(course)
-} catch (error) {
+
+    return res.status(200).json(course);
+  } catch (error) {
     return res.status(500).json({
       message: error.message
     });
-}
-}
+  }
+};
+
 
 export const removecourse=async(req,res)=>{
     try {
@@ -134,29 +144,47 @@ export const removecourse=async(req,res)=>{
     }
 }
 
-export const createlecture=async(req,res)=>{
-try {
-    const {lecturetitle}=req.body;
-    const {courseId}=req.params;
-    if(!lecturetitle || !courseId){
-        return res.status(400).json({
-            message:"lecturetitle is required"
-        })
+export const createlecture = async (req, res) => {
+  try {
+    const { lecturetitle } = req.body;
+    const { courseId } = req.params;
+
+    if (!lecturetitle || !courseId) {
+      return res.status(400).json({
+        message: "lecturetitle is required"
+      });
     }
-    const lecture = await Lecture.create({ lecturetitle: lecturetitle})
-    const course=await Course.findById(courseId)
-    if(course){
-        course.lectures.push(lecture._id)
+
+    const lecture = await Lecture.create({
+      lecturetitle: lecturetitle
+    });
+
+    const course = await Course.findById(courseId);
+
+    if (!course) {
+      return res.status(404).json({
+        message: "course not found"
+      });
     }
-    course.populate("lectures")
-    course.save()
-    return res.status(201).json({lecture,course})
-} catch (error) {
+
+    course.lectures.push(lecture._id);
+    await course.save();
+
+    const populatedCourse = await Course
+      .findById(courseId)
+      .populate("lectures");
+
+    return res.status(201).json({
+      lecture,
+      course: populatedCourse
+    });
+
+  } catch (error) {
     return res.status(500).json({
-        message:`failed to create Lecture ${error}`
-    })
-}
-}
+      message: `failed to create Lecture ${error.message}`
+    });
+  }
+};
 
 export const getcourselecture=async(req,res)=>{
 try {

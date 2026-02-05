@@ -36,7 +36,9 @@ function Createlecture(){
         async function getcourselecture(){
             try {
                let result = await axios.get(`${serverurl}/api/course/courselecture/${courseId}`,{withCredentials:true})
-            dispatch(setLectureData(result.data)); 
+            dispatch(setLectureData(result.data.course));
+            dispatch(setSelectedCourse(result.data.course));
+
             console.log(result.data)
             } catch (error) {
                 console.log(error)
