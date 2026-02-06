@@ -1,6 +1,7 @@
 import Course from "../Models/courseModel.js";
 import uploadoncloudinary from "../Config/Cloudinary.js";
 import Lecture from "../Models/lectureModel.js";
+import User from "../Models/user.models.js";
 export const createCourse=async(req,res)=>{
     try {
         let{title,category}=req.body;
@@ -27,7 +28,7 @@ export const getpublishedcourse = async (req, res) => {
     const courses = await Course
       .find({ ispublished: true })
       .populate("lectures");
-
+    console.log(courses)
     if (courses.length === 0) {
       return res.status(404).json({
         message: "No published courses found"
@@ -205,31 +206,40 @@ try {
 }
 }
 
-export const editlecture=async(req,res)=>{
-try {
-    let {lectureId}=req.params;
-    const {ispreviewfree,lecturetitle}=req.body
-    const lecture=await Lecture.findById(lectureId);
-    if(!lecture){
-         return res.status(400).json({
-            message:"Course is not found"
-        })
+export const editlecture = async (req, res) => {
+  try {
+    const { lectureId } = req.params;
+    const { ispreviewfree, lecturetitle } = req.body;
+
+    const lecture = await Lecture.findById(lectureId);
+    if (!lecture) {
+      return res.status(400).json({
+        message: "Course is not found",
+      });
     }
-    let videourl;
-    if(req.file){
-        videourl=await uploadoncloudinary(req.file.path)
+
+    if (req.file) {
+      const videourl = await uploadoncloudinary(req.file.path);
+      lecture.videourl = videourl; // agar model me field hai
     }
-    lecture.videourl=videourl;
-    lecture.ispreviewfree=ispreviewfree;
-    lecture.lecturetitle=lecturetitle;
+
+    if (lecturetitle) {
+      lecture.lecturetitle = lecturetitle;
+    }
+
+    lecture.ispreviewfree = ispreviewfree;
+
     await lecture.save();
-    return res.status(200).json(lecture)
-} catch (error) {
+
+    return res.status(200).json(lecture);
+  } catch (error) {
+    console.error(error); 
     return res.status(500).json({
-        message:`failed to edit lecture ${error}`
-    })
-}
-}
+      message: `failed to edit lecture: ${error.message}`,
+    });
+  }
+};
+
 
 export const removelecture=async(req,res)=>{
     try {
@@ -250,4 +260,21 @@ export const removelecture=async(req,res)=>{
         message:`failed to remove lecture ${error}`
     })
     }
+}
+
+export const getcreaorbyId=async(req,res)=>{
+  try {
+    let {userId} =req.body;
+    const user=await User.findById(userId).select("-password");
+    if(!user){
+      return res.status(404).json({
+        message:"user not found"
+      })
+    }
+    return res.status(200).json(user)
+  } catch (error) {
+    return res.status(500).json({
+      message:`failed to get creator ${error}`
+    })
+  }
 }

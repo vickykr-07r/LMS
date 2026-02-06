@@ -13,7 +13,6 @@ function Createlecture(){
 
     let dispatch=useDispatch();
     let {lectureData}=useSelector(state=>state.lecture)
-
     let {courseId}=useParams();
     let navigate=useNavigate();
     
@@ -36,9 +35,7 @@ function Createlecture(){
         async function getcourselecture(){
             try {
                let result = await axios.get(`${serverurl}/api/course/courselecture/${courseId}`,{withCredentials:true})
-            dispatch(setLectureData(result.data.course));
-            dispatch(setSelectedCourse(result.data.course));
-
+            dispatch(setLectureData(result.data.lectures));
             console.log(result.data)
             } catch (error) {
                 console.log(error)
@@ -62,7 +59,7 @@ function Createlecture(){
          <button onClick={handlecreateLecture}>{loading ? <ClipLoader size={30} color="white"/> : "create Lecture"}</button>
         </div>
         
-        {lectureData?.lectures?.map((lecture, index) => (
+        {lectureData?.map((lecture, index) => (
         <div key={lecture._id} className={Style.lecturerow}>
         <span>
         Lecture-{index + 1}: {lecture.lecturetitle}

@@ -1,16 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import Style from "../ViewCourses/viewcourses.module.css"
 import { setSelectedCourse } from "../../Redux/courseSlice";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
+import { IoStar } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import image from "../../assets/360_F_1782566901_cVPHOOg5fMRbCKNX61r4MG5okjv7KS2a.jpg"
+import axios from "axios";
+import { ServerContext } from "../../Context/Context";
+import Cards from "../../Cards/Cards";
 function ViewCourses(){
+    let {serverurl}=useContext(ServerContext)
    let {courseId}=useParams();
     let {creatorCoursesData}=useSelector(state=>state.course)
     let {selectedCourse}=useSelector(state=>state.course)
     let dispatch=useDispatch();
     let navigate=useNavigate();
+    let [creatorData,setCreatorData]=useState();
+    const [creatorCourses,setCreatorCourses]=useState(null);
     console.log(selectedCourse)
     const fetchCourseData=async()=>{
      creatorCoursesData.map((course)=>{
@@ -24,6 +31,33 @@ function ViewCourses(){
     useEffect(()=>{
         fetchCourseData()
     },[creatorCoursesData,courseId])
+
+    useEffect(()=>{
+        const handleCreator=async()=>{
+        if(selectedCourse?.creator){
+        try {
+            let result = await axios.post(`${serverurl}/api/course/creator`,{userId:selectedCourse?.creator},{withCredentials:true})
+            setCreatorData(result.data)
+          
+        } catch (error) {
+            console.log(error)
+        }
+        }
+      }
+
+      handleCreator();
+    },[selectedCourse])
+
+    useEffect(()=>{
+      if (creatorData?._id && creatorCoursesData.length > 0) {
+  const creatorCourses = creatorCoursesData.filter((course) => {
+    return course.creator === creatorData._id && course._id !== courseId;
+  });
+
+  setCreatorCourses(creatorCourses);
+}
+
+    },[creatorData,creatorCoursesData])
     return(
         <>
         <div className={Style.container}>
@@ -69,8 +103,50 @@ function ViewCourses(){
             <p>{selectedCourse?.lectures?.length} lectures</p>
             
             </div>
-           
+          
             </div>
+            <hr />
+            <div className={Style.review}>
+             <h1>Write Your Review</h1>
+
+            <div className={Style.stars}>
+            {[1, 2, 3, 4, 5].map((index) => {
+            return <IoStar key={index} />;
+            })}
+            </div>
+
+             <textarea placeholder="Write Your Review Here" />
+            <button>Submit Review</button>
+            </div>
+             <hr />
+
+             <div className={Style.creatordata}>
+                <div className={Style.creatordataleft}>
+                 {creatorData?.photourl ? <img src={creatorData?.photourl}/>:<img src="https://th.bing.com/th/id/OIP.rkdWfkfBqs47aAp8fEjC2QHaJU?w=150&h=189&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"/>}
+                </div>
+                <div className={Style.creatordataright}>
+                 <h1>{creatorData?.name}</h1>
+                 <h2>{creatorData?.email}</h2>
+                 <h3>{creatorData?.description}</h3>
+                </div>
+             </div>
+             <div className={Style.Cards}>
+  <h1>Other Published Course By Educator</h1>
+
+  <div className={Style.cardGrid}>
+    {creatorCoursesData?.map((course) => (
+      <Cards
+        key={course._id}
+        thumbnail={course.thumbnail}
+        title={course.title}
+        category={course.category}
+        price={course.price}
+        id={course._id}
+      />
+    ))}
+  </div>
+</div>
+
         </div>
         </>
     )

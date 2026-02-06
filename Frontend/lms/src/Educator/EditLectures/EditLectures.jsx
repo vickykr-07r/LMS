@@ -5,6 +5,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { ServerContext } from "../../Context/Context";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { setLectureData } from "../../Redux/lectureSlice";
 function EditLecture(){
     let[title,setTitle]=useState("");
     let[file,setFile]=useState(null);
@@ -12,6 +14,8 @@ function EditLecture(){
     let {lectureId,courseId}=useParams();
     let {serverurl}=useContext(ServerContext)
     let navigate=useNavigate();
+    let {lectureData}=useSelector(state=>state.lecture)
+    const selectedLecture=lectureData.find(lecture=>lecture._id===lectureId)
    function handleFile(event) {
     const video = event.target.files?.[0];
      if (!video) return;
@@ -28,6 +32,7 @@ function EditLecture(){
        try {
         let result = await axios.post(`${serverurl}/api/course/editlecture/${lectureId}`,form,{withCredentials:true})
         console.log(result.data);
+        dispatchEvent(setLectureData([...lectureData,result.data]))
        } catch (error) {
         console.log(error)
        }
