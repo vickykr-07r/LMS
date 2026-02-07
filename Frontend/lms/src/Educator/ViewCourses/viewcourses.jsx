@@ -19,6 +19,7 @@ function ViewCourses(){
     let [creatorData,setCreatorData]=useState();
     const [creatorCourses,setCreatorCourses]=useState(null);
     console.log(selectedCourse)
+    const {userData}=useSelector(state=>state.user)
     const fetchCourseData=async()=>{
      creatorCoursesData.map((course)=>{
              if(course._id==courseId){
@@ -58,6 +59,37 @@ function ViewCourses(){
 }
 
     },[creatorData,creatorCoursesData])
+
+    const handleEnroll=async(userId,courseId)=>{
+      try {
+        const orderData=await axios.post(`${serverurl}/api/order/razorpay-order`,{userId,courseId},{withCredentials:true})
+        console.log(orderData)
+
+        const options={
+          key:import.meta.env.VITE_RAZORPAY_KEY_ID,
+          amount:orderData.data.amount,
+          currency:'INR',
+          name:"VICKY KUMAR",
+          description:"COURSE ENROLLMENT PAYMENT",
+         order_id: orderData.data.id,
+          handler:async function(response){
+            console.log("Razorpay Response",response)
+            try {
+              const verifypayment=await axios.post(`${serverurl}/api/order/verifypayment`,{...response,courseId,userId},{withCredentials:true})
+             console.log(verifypayment.data.message)
+            } catch (error) {
+              console.log(error)
+            }
+          }
+          
+        }
+
+        const rzp=new window.Razorpay(options)
+        rzp.open()
+      } catch (error) {
+        console.log(error)
+      }
+    }
     return(
         <>
         <div className={Style.container}>
@@ -76,7 +108,7 @@ function ViewCourses(){
                 <p>10+ hours of video content</p>
                 <p>Lifetime access to course materials</p>
 
-                <button>Enroll Now</button>
+                <button onClick={()=>{handleEnroll(userData._id,courseId)}}>Enroll Now</button>
                 </div>
                
 

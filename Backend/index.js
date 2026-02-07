@@ -30,7 +30,8 @@ import { courseRouter } from "./Routes/course.routes.js";
 app.use("/api/course",courseRouter)
 
 import { paymentRouter } from "./Routes/payment.routes.js";
-app.use("/api/",paymentRouter)
+app.use("/api/order",paymentRouter)
+
 app.listen(process.env.PORT,()=>{
     console.log("the app is listening")
     connect();

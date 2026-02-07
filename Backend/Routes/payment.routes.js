@@ -1,5 +1,5 @@
 import express from "express"
-import { RazorpayOrder, verifypayment } from "../Controllers/orderController";
+import { RazorpayOrder, verifypayment } from "../Controllers/orderController.js";
 export let paymentRouter=express.Router();
 
 paymentRouter.post("/razorpay-order",RazorpayOrder)
