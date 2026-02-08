@@ -17,6 +17,7 @@ function ViewCourses(){
     let dispatch=useDispatch();
     let navigate=useNavigate();
     let [creatorData,setCreatorData]=useState();
+    let[isEnrolled,setIsEnrolled]=useState(false);
     const [creatorCourses,setCreatorCourses]=useState(null);
     console.log(selectedCourse)
     const {userData}=useSelector(state=>state.user)
@@ -28,9 +29,17 @@ function ViewCourses(){
              }
      })
     }
-
+     
+    const checkEnrollment=()=>{
+      const verify = userData?.enrolledcourses?.some(c=>
+      (typeof c==='string' ? c:c._id).toString()===courseId?.toString())
+      if(verify){
+        setIsEnrolled(true);
+      }
+    }
     useEffect(()=>{
         fetchCourseData()
+        checkEnrollment()
     },[creatorCoursesData,courseId])
 
     useEffect(()=>{
@@ -77,6 +86,7 @@ function ViewCourses(){
             try {
               const verifypayment=await axios.post(`${serverurl}/api/order/verifypayment`,{...response,courseId,userId},{withCredentials:true})
              console.log(verifypayment.data.message)
+             setIsEnrolled(true);
             } catch (error) {
               console.log(error)
             }
@@ -107,8 +117,13 @@ function ViewCourses(){
                 <h3>price:{selectedCourse?.price}</h3>
                 <p>10+ hours of video content</p>
                 <p>Lifetime access to course materials</p>
-
+                 {!isEnrolled &&
                 <button onClick={()=>{handleEnroll(userData._id,courseId)}}>Enroll Now</button>
+                 }
+                  {isEnrolled &&
+                <button onClick={()=>{navigate(`/viewlecture/${courseId}`)}}>Watch Now</button>
+                 }
+
                 </div>
                
 

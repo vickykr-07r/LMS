@@ -17,6 +17,7 @@ import Allcourses from './AllCourses/Allcourses.jsx'
 import Createlecture from './Educator/CreateLecture/CreateLecture.jsx'
 import EditLecture from './Educator/EditLectures/EditLectures.jsx'
 import ViewCourses from './Educator/ViewCourses/viewcourses.jsx'
+import ViewLecture from './Educator/ViewLecture/viewlecture.jsx'
 function App() {
   useGetCurrentUser()
   getCreatorCourses()
@@ -56,6 +57,8 @@ function App() {
          <Route path='/editlecture/:courseId/:lectureId' element={userData ? <EditLecture /> : <Navigate to="/login" />}/>
 
          <Route path="/viewcourse/:courseId" element={userData?.role === "educator" ? <ViewCourses /> : <Navigate to="/login" />}/>
+
+         <Route path='/viewlecture/:courseId' element={userData ? <ViewLecture /> : <Navigate to="/login" />}/>
       </Routes>
     </>
   )
